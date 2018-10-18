@@ -72,7 +72,8 @@ const User_API = {
 	Create: create,
 	List: list,
 	Read: read,
-	Update: update
+	Update: update,
+	Remove: remove
 };
   
 export default User_API;

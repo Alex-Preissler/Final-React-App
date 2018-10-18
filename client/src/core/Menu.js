@@ -1,25 +1,58 @@
 import React from "react";
 import AppBar from "@material-ui/core/AppBar";
-import ToolBar from "@material-ui/core/Toolbar";
+import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
+import Button from "@material-ui/core/Button";
 import HomeIcon from "@material-ui/icons/Home";
+import Auth from "../auth/auth-helper";
 import { Link, withRouter } from "react-router-dom";
+
+const isActive = (history, path) => {
+	if (history.location.pathname === path)
+	  return {color: '#ff4081'}
+	else
+	  return {color: '#ffffff'}
+  }
+
 
 const Menu = withRouter(({history}) => (
 
-	<AppBar>
-		<ToolBar>
-			<Typography>
-				All In One Planner
-			</Typography>
-			<Link to="/">
-				<IconButton>
-					<HomeIcon/>
-				</IconButton>
-			</Link>
-		</ToolBar>
-	</AppBar>
+	<AppBar position="static">
+    <Toolbar>
+      <Typography type="h6" color="inherit">
+        All In One Planner
+      </Typography>
+      <Link to="/">
+        <IconButton aria-label="Home" style={isActive(history, "/")}>
+          <HomeIcon/>
+        </IconButton>
+      </Link>
+      {
+        !Auth.IsAuthenticated() && (<span>
+          <Link to="/signup">
+            <Button style={isActive(history, "/signup")}>Sign up
+            </Button>
+          </Link>
+          <Link to="/signin">
+            <Button style={isActive(history, "/signin")}>Sign In
+            </Button>
+          </Link>
+        </span>)
+      }
+      {
+        Auth.IsAuthenticated() && (<span>
+          <Link to={"/user/" + Auth.IsAuthenticated().user._id}>
+            <Button style={isActive(history, "/user/" + Auth.IsAuthenticated().user._id)}>My Profile</Button>
+          </Link>
+          <Button color="inherit" onClick={() => {
+              Auth.Signout(() => history.push('/'))
+            }}>Sign out</Button>
+        </span>)
+      }
+    </Toolbar>
+  </AppBar>
+
 ))
 
 export default Menu;

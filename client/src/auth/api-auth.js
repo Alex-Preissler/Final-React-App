@@ -2,27 +2,32 @@ const signin = (user) => {
 	return fetch('/auth/signin/', {
 		method: 'POST',
 		headers: {
-		  'Accept': 'application/json',
-		  'Content-Type': 'application/json'
+			'Accept': 'application/json',
+			'Content-Type': 'application/json'
 		},
 		credentials: 'include',
 		body: JSON.stringify(user)
-	  })
-	  .then((response) => {
+	})
+	.then((response) => {
 		return response.json()
-	  }).catch((err) => console.log(err))
-  }
+	})
+	.catch((err) => console.log(err))
+}
   
-  const signout = () => {
+const signout = () => {
 	return fetch('/auth/signout/', {
-	  method: 'GET',
-	}).then(response => {
+		method: 'GET',
+	})
+	.then(response => {
 		return response.json()
-	}).catch((err) => console.log(err))
-  }
+	})
+	.catch((err) => console.log(err))
+}
   
-  export {
-	signin,
-	signout
-  }
+const Auth_API = {
+	Signin: signin,
+	Signout: signout
+};
+
+export default Auth_API;
   

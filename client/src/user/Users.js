@@ -1,11 +1,15 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import List, { ListItem, ListItemAvatar, ListItemSecondaryAction, ListItemText } from "@material-ui/core/List";
 import Avatar from "@material-ui/core/Avatar";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import ArrowForward from "@material-ui/icons/ArrowForward";
 import Person from "@material-ui/icons/Person";
+import Paper from "@material-ui/core/Paper";
 import { Link } from "react-router-dom";
+import API from "../auth/api-user";
+
 
 class Users extends Component {
 	state = {
@@ -13,7 +17,7 @@ class Users extends Component {
 	}
   
 	componentDidMount() {
-	  list().then((data) => {
+	  API.list().then((data) => {
 		if (data.error) {
 		  console.log(data.error)
 		} else {

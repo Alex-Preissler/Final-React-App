@@ -1,9 +1,14 @@
 import React, { Component } from "react";
-import Card, { CardActions, CardContent } from "@material-ui/core/Card";
+import PropTypes from "prop-types";
+import Card from "@material-ui/core/Card";
+import CardActions from "@material-ui/core/CardActions";
+import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
+import Icon from "@material-ui/core/Icon";
 import { Redirect } from "react-router-dom";
+import API from "../auth/api-user";
 
 class EditProfile extends Component {
 	constructor({match}) {
@@ -19,8 +24,8 @@ class EditProfile extends Component {
 	}
   
 	componentDidMount = () => {
-	  const jwt = auth.isAuthenticated()
-	  read({
+	  const jwt = API.auth.isAuthenticated()
+	  API.Read({
 		userId: this.match.params.userId
 	  }, {t: jwt.token}).then((data) => {
 		if (data.error) {
@@ -31,13 +36,13 @@ class EditProfile extends Component {
 	  })
 	}
 	clickSubmit = () => {
-	  const jwt = auth.isAuthenticated()
+	  const jwt = API.auth.isAuthenticated()
 	  const user = {
 		name: this.state.name || undefined,
 		email: this.state.email || undefined,
 		password: this.state.password || undefined
 	  }
-	  update({
+	  API.Update({
 		userId: this.match.params.userId
 	  }, {
 		t: jwt.token

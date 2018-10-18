@@ -1,18 +1,36 @@
-import React, { Component } from "react";
-import Card, { CardContent } from "@material-ui/core/Card"
-import Typography from "@material-ui/core/Typography";
+import React from 'react';
+import PropTypes from 'prop-types';
+import Typography from '@material-ui/core/Typography';
+import { withTheme } from '@material-ui/core/styles';
 
-class Home extends Component {
+function Home(props) {
+  const { theme } = props;
+  const primaryText = theme.palette.text.primary;
+  const primaryColor = theme.palette.primary.main;
 
-	render() {
-		return(
-			<Card>
-				<CardContent>
-					<Typography/>
-				</CardContent>
-			</Card>
-		)
-	}
+  const styles = {
+    primaryText: {
+      backgroundColor: theme.palette.background.default,
+      padding: `${theme.spacing.unit}px ${theme.spacing.unit * 2}px`,
+      color: primaryText,
+    },
+    primaryColor: {
+      backgroundColor: primaryColor,
+      padding: `${theme.spacing.unit}px ${theme.spacing.unit * 2}px`,
+      color: theme.palette.common.white,
+    },
+  };
+
+  return (
+    <div style={{ width: 300 }}>
+      <Typography style={styles.primaryColor}>{`Primary color ${primaryColor}`}</Typography>
+      <Typography style={styles.primaryText}>{`Primary text ${primaryText}`}</Typography>
+    </div>
+  );
 }
 
-export default Home;
+Home.propTypes = {
+  theme: PropTypes.object.isRequired,
+};
+
+export default withTheme()(Home);

@@ -1,9 +1,15 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import IconButton from "@material-ui/core/IconButton";
 import Button from "@material-ui/core/Button";
 import DeleteIcon from "@material-ui/icons/Delete";
-import Dialog, {DialogActions, DialogContent, DialogContentText, DialogTitle} from "@material-ui/core/Dialog";
-import { Redirect, Link } from "react-router-dom";
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import { Redirect } from "react-router-dom";
+import API from "../auth/api-user";
 
 class DeleteUser extends Component {
 	state = {
@@ -14,14 +20,14 @@ class DeleteUser extends Component {
 	  this.setState({open: true})
 	}
 	deleteAccount = () => {
-	  const jwt = auth.isAuthenticated()
-	  remove({
+	  const jwt = API.auth.isAuthenticated()
+	  API.remove({
 		userId: this.props.userId
 	  }, {t: jwt.token}).then((data) => {
 		if (data.error) {
 		  console.log(data.error)
 		} else {
-		  auth.signout(() => console.log('deleted'))
+		 API.auth.signout(() => console.log('deleted'))
 		  this.setState({redirect: true})
 		}
 	  })
@@ -67,4 +73,4 @@ class DeleteUser extends Component {
 	userId: PropTypes.string.isRequired
 }
 
-  export default DeleteUser
+export default DeleteUser
