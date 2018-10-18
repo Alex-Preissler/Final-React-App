@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Menu from "./core/Menu";
+import AppBar from "./core/AppBar";
 import Home from "./core/Home";
 import Users from "./user/Users";
 import Signup from "./user/Signup";
@@ -23,9 +23,9 @@ class MainRouter extends Component {
 		return(
 			<Router>
 				<div>
-					<Menu/>
+					<AppBar/>
 					<Switch>
-						<Route exact path="/" component={ Home }/>
+						<Route exact path="/"/>
 						<Route path="/users" component={ Users }/>
 						<Route path="/signup" component={ Signup }/>
 						<Route path="/signin" component={ Signin }/>
