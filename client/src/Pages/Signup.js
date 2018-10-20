@@ -53,7 +53,7 @@ class Signup extends Component {
 	};
 
 	clickSubmit = () => {
-		const user = {
+		let user = {
 			firstName: this.state.firstName,
 			lastName: this.state.lastName,
 			email: this.state.email,

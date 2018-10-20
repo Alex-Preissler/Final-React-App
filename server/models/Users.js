@@ -24,6 +24,11 @@ const UserSchema = new mongoose.Schema({
 		unique: true,
 		required: false
 	},
+	username: {
+		type: String,
+		unique: true,
+		required: true
+	},
 	hashed_password: {
 		type: String,
 		required: "Password is required."
@@ -36,26 +41,21 @@ const UserSchema = new mongoose.Schema({
 	}
 })
 
-UserSchema
+UserSchema.pre()
 	.virtual("password")
-	.set(function(password) {
+	.set(function (password) {
+		console.log(password);
 		this._password = password;
-		bcrypt.genSalt(10, function(err, salt) {
-			this.salt = salt;
-			bcrypt.hash(password, salt, function(err, hash) {
-				this.hashed_password = hash;
-			}).catch(function(err) {
-				console.log(err);
-			})
-		}).catch(function(err){
-			console.log(err);
+		bcrypt.hash(password, 10, (err, hash) => {
+			console.log(hash);
+			this.hashed_password = hash;
 		})
 	})
-	.get(function() {
+	.get(function () {
 		return this._password
 	})
 
-UserSchema.path("hashed_password").validate(function() {
+UserSchema.path("hashed_password").validate(function (v) {
 	if (this._password && this._password.length < 8) {
 		this.invalidate("password", "Password must be at least 8 characters.");
 	}
@@ -65,9 +65,9 @@ UserSchema.path("hashed_password").validate(function() {
 }, null)
 
 UserSchema.methods = {
-	authenticate: function(plainText) {
+	authenticate: function (plainText) {
 		bcrypt.compare(plainText, hash).then((res) => {
-			return(res);
+			return (res);
 		});
 	}
 }

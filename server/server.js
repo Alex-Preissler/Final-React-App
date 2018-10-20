@@ -1,6 +1,6 @@
 const express = require("express");
 const path = require("path");
-const routes = require("./routes");
+const routes = require("./routes/account-routes");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const config = require("./config/config");
@@ -14,6 +14,7 @@ if (config.env === "production") {
 }
 
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 app.use(express.static("public"));
 
 mongoose.Promise = Promise;
