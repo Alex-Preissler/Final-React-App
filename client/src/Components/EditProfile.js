@@ -8,55 +8,10 @@ import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import Icon from "@material-ui/core/Icon";
 import { Redirect } from "react-router-dom";
-import API from "../auth/api-user";
 
 class EditProfile extends Component {
-	constructor({match}) {
-	  super()
-	  this.state = {
-		name: '',
-		email: '',
-		password: '',
-		redirectToProfile: false,
-		error: ''
-	  }
-	  this.match = match
-	}
-  
-	componentDidMount = () => {
-	  const jwt = API.auth.isAuthenticated()
-	  API.Read({
-		userId: this.match.params.userId
-	  }, {t: jwt.token}).then((data) => {
-		if (data.error) {
-		  this.setState({error: data.error})
-		} else {
-		  this.setState({name: data.name, email: data.email})
-		}
-	  })
-	}
-	clickSubmit = () => {
-	  const jwt = API.auth.isAuthenticated()
-	  const user = {
-		name: this.state.name || undefined,
-		email: this.state.email || undefined,
-		password: this.state.password || undefined
-	  }
-	  API.Update({
-		userId: this.match.params.userId
-	  }, {
-		t: jwt.token
-	  }, user).then((data) => {
-		if (data.error) {
-		  this.setState({error: data.error})
-		} else {
-		  this.setState({'userId': data._id, 'redirectToProfile': true})
-		}
-	  })
-	}
-	handleChange = name => event => {
-	  this.setState({[name]: event.target.value})
-	}
+	
+
 	render() {
 	  const {classes} = this.props
 	  	if (this.state.redirectToProfile) {

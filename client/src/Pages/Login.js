@@ -7,8 +7,7 @@ import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import Icon from "@material-ui/core/Icon";
 import { Redirect } from "react-router-dom";
-import API from "./api-auth";
-import Auth from "./auth-helper";
+
 
 
 class Signin extends Component {
@@ -20,20 +19,10 @@ class Signin extends Component {
 	}
   
 	clickSubmit = () => {
-		const user = {
+		/*const user = {
 			email: this.state.email || undefined,
 			password: this.state.password || undefined
-		}
-  
-	  	API.Signin(user).then((data) => {
-			if (data.error) {
-		  		this.setState({error: data.error})
-			} else {
-		  		Auth.Authenticate(data, () => {
-					this.setState({redirectToReferrer: true})
-		  		})
-			}
-	  	})
+		}*/
 	}
   
 	handleChange = name => event => {

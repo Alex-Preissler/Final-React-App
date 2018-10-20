@@ -1,5 +1,6 @@
 const express = require("express");
 const path = require("path");
+const routes = require("./routes");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const config = require("./config/config");
@@ -18,8 +19,7 @@ app.use(express.static("public"));
 mongoose.Promise = Promise;
 mongoose.connect(config.MONGODB_URI, { useNewUrlParser: true });
 
-require("./routes/authentication/auth-routes")(app, db);
-require("./routes/api/user-routes")(app, db);
+app.use(routes);
 // Send every request to the React app
 // Define any API routes before this runs
 app.get("*", function(req, res) {

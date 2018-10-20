@@ -1,13 +1,10 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import AppBar from "./core/AppBar";
-import Home from "./core/Home";
-import Users from "./user/Users";
-import Signup from "./user/Signup";
-import Signin from "./auth/Signin";
-import EditProfile from "./user/EditProfile";
-import Profile from "./user/Profile";
-import PrivateRoute from "./auth/PrivateRoute";
+import AppBar from "./Components/AppBar";
+import Home from "./Pages/Home";
+import Signup from "./Pages/Signup";
+import Login from "./Pages/Login";
+import UserWrapper from "./Pages/UserWrapper";
 
 
 class MainRouter extends Component {
@@ -25,12 +22,10 @@ class MainRouter extends Component {
 				<div>
 					<AppBar/>
 					<Switch>
-						<Route exact path="/"/>
-						<Route path="/users" component={ Users }/>
+						<Route exact path="/" component={ Home }/>
 						<Route path="/signup" component={ Signup }/>
-						<Route path="/signin" component={ Signin }/>
-						<PrivateRoute path="/user/edit/:userId" component={ EditProfile }/>
-						<Route path="/user/:userId" component={ Profile }/>
+						<Route path="/login" component={ Login }/>
+						<Route path="/:user/home" component={ UserWrapper }/>
 					</Switch>
 				</div>
 			</Router>
