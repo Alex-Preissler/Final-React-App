@@ -7,10 +7,11 @@ import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import Icon from "@material-ui/core/Icon";
 import { Redirect } from "react-router-dom";
+import UserAuth from "../Authentication/Auth-Helper";
 
 
 
-class Signin extends Component {
+class Login extends Component {
 	state = {
 		email: '',
 		password: '',
@@ -19,27 +20,43 @@ class Signin extends Component {
 	}
   
 	clickSubmit = () => {
-		/*const user = {
-			email: this.state.email || undefined,
-			password: this.state.password || undefined
-		}*/
+		const user = {
+			email: this.state.email,
+			password: this.state.password
+		}
+
+		console.log(user);
+
+		UserAuth.Authenticate(user, res => {
+			if(res === true) {
+				this.setState({
+					redirectToReferrer: res
+				})
+			}else{
+				this.setState({
+					error: "Invalid Email/Password."
+				})
+			}
+		});
+			
 	}
-  
-	handleChange = name => event => {
-		this.setState({[name]: event.target.value})
+
+	handleInputChange = event => {
+
+		const { name, value } = event.target;
+
+		this.setState({[name]: value});
 	}
   
 	render() {
 	  
-	  	const {from} = this.props.location.state || {
-			from: {
-		  		pathname: '/'
-			}
-	  	}
-	  	const {redirectToReferrer} = this.state
-	  		if (redirectToReferrer) {
-			return (<Redirect to={from}/>)
-	  	}
+	const to = "/" + UserAuth._id;     
+	console.log(this.props.location.state);
+	const { redirectToReferrer } = this.state;
+		  
+	if (redirectToReferrer) {
+		return (<Redirect to={to}/>)
+	};
   
 	return (
 		<Card>
@@ -47,9 +64,9 @@ class Signin extends Component {
 				<Typography type="headline" component="h2">
 			  		Sign In
 				</Typography>
-				<TextField id="email" type="email" label="Email"  value={this.state.email} onChange={this.handleChange('email')} margin="normal"/>
+				<TextField id="email" type="email" label="Email"  name="email" value={this.state.email} onChange={ this.handleInputChange } margin="normal"/>
 				<br/>
-				<TextField id="password" type="password" label="Password" value={this.state.password} onChange={this.handleChange('password')} margin="normal"/>
+				<TextField id="password" type="password" label="Password" name="password" value={this.state.password} onChange={ this.handleInputChange } margin="normal"/>
 				<br/> 
 				{
 			  		this.state.error && (
@@ -64,7 +81,8 @@ class Signin extends Component {
 				<Button color="primary" variant="contained" onClick={this.clickSubmit}>Submit</Button>
 		  	</CardActions>
 		</Card>
-	)}
+		)
+	}
 }
   
-export default Signin;
+export default Login;

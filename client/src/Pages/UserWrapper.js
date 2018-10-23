@@ -10,6 +10,7 @@ import Calendar from "../Components/Calendar";
 import Cleaning from "../Components/Cleaning";
 import Workouts from "../Components/Workouts";
 import Meals from "../Components/Meals";
+import UserAuth from "../Authentication/Auth-Helper";
 
 
 const styles = theme => ({

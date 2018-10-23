@@ -8,6 +8,7 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 import Grid from "@material-ui/core/Grid";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import Hidden from "@material-ui/core/Hidden";
+import { Route, Redirect } from "react-router-dom";
 import API from "../JS/api-user";
 
 const styles = theme => ({
@@ -41,7 +42,7 @@ class Signup extends Component {
 		password: '',
 		email: '',
 		phone: '',
-		open: false,
+		redirect: false,
 		error: ''
 	}
 
@@ -64,7 +65,9 @@ class Signup extends Component {
 
 		API.Create(user)
 			.then(res => {
-				console.log(res);
+				this.setState({
+					redirect: true
+				});
 			})
 			.catch(err => {
 				console.log(err);
@@ -77,6 +80,11 @@ class Signup extends Component {
 	render() {
 
 		const { classes } = this.props;
+		const singupSuccess = this.state.redirect;
+
+		if(singupSuccess) {
+			return <Redirect to="/"/>
+		}
 
 		return (
 

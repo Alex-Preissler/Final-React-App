@@ -28,6 +28,9 @@ const UserSchema = new mongoose.Schema({
 UserSchema
   .virtual('password')
   .set(function(password) {
+	if(password){
+		this.hashed_password = "await";
+	}  
     this._password = password
     this.salt = this.makeSalt()
     this.hashed_password = this.encryptPassword(password)

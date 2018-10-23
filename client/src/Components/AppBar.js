@@ -11,7 +11,8 @@ import Menu from "@material-ui/core/Menu";
 import Grid from "@material-ui/core/Grid";
 import Hidden from "@material-ui/core/Hidden";
 import { withStyles } from "@material-ui/core/styles";
-import { Link } from "react-router-dom";
+import { Redirect,  Link, withRouter } from "react-router-dom";
+import UserAuth from "../Authentication/Auth-Helper";
 
 const styles = {
 	root: {
@@ -24,12 +25,16 @@ const styles = {
 	}
 };
 
+
+
 class MainAppBar extends React.Component {
 
 	state = {
-		auth: false,
-		anchorEl: null
+		anchorEl: null,
+		signout: true
 	};
+
+
 
 	handleChange = event => {
 		this.setState({ auth: event.target.checked });
@@ -37,16 +42,30 @@ class MainAppBar extends React.Component {
 
 	handleMenu = event => {
 		this.setState({ anchorEl: event.currentTarget });
+		console.log(event.currentTarget);
 	};
 
-	handleClose = () => {
+	handleClose = (event) => {
 		this.setState({ anchorEl: null });
 	};
 
+	handleSignout = event => {
+		UserAuth.Signout(res => {
+			if(res === true) {
+				return this.setState({ singout: true });
+			}
+		})
+	}
+
 	render() {
 		const { classes } = this.props;
-		const { auth, anchorEl } = this.state;
+		const { anchorEl, signout } = this.state;
 		const open = Boolean(anchorEl);
+
+		if(this.state.signout) {
+			this.setState({ signout: false });
+			return <Redirect to="/home"/>
+		}
 
 		return (
 			<AppBar position="static" className={classes.root}>
@@ -62,7 +81,7 @@ class MainAppBar extends React.Component {
 					</Hidden>
 					<Grid item xs={12} sm={2}>
 						<Toolbar>
-							{!auth && (
+							{!UserAuth.isAuthenticated && (
 								<div>
 									<Link to="/signup">
 										<Button>
@@ -76,7 +95,7 @@ class MainAppBar extends React.Component {
 									</Link>
 								</div>
 							)}
-							{auth && (
+							{UserAuth.isAuthenticated && (
 								<div>
 									<IconButton
 										aria-owns={open ? "menu-appbar" : null}
@@ -102,6 +121,7 @@ class MainAppBar extends React.Component {
 									>
 										<MenuItem onClick={this.handleClose}>Profile</MenuItem>
 										<MenuItem onClick={this.handleClose}>My Account</MenuItem>
+										<MenuItem onClick={this.handleClose}>Signout</MenuItem>
 									</Menu>
 								</div>
 							)}

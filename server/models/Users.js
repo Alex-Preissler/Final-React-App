@@ -20,7 +20,7 @@ const UserSchema = new mongoose.Schema({
 		required: "Email is required"
 	},
 	phone: {
-		type: Number,
+		type: String,
 		unique: true,
 		required: false
 	},
@@ -29,40 +29,16 @@ const UserSchema = new mongoose.Schema({
 		unique: true,
 		required: true
 	},
-	hashed_password: {
+	password: {
 		type: String,
 		required: "Password is required."
 	},
-	salt: String,
 	updated: Date,
 	created: {
 		type: Date,
 		default: Date.now
 	}
 })
-
-UserSchema.pre()
-	.virtual("password")
-	.set(function (password) {
-		console.log(password);
-		this._password = password;
-		bcrypt.hash(password, 10, (err, hash) => {
-			console.log(hash);
-			this.hashed_password = hash;
-		})
-	})
-	.get(function () {
-		return this._password
-	})
-
-UserSchema.path("hashed_password").validate(function (v) {
-	if (this._password && this._password.length < 8) {
-		this.invalidate("password", "Password must be at least 8 characters.");
-	}
-	if (this.isNew && !this._password) {
-		this.invalidate("password", "Password is required");
-	}
-}, null)
 
 UserSchema.methods = {
 	authenticate: function (plainText) {

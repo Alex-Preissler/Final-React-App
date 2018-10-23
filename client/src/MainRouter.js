@@ -5,6 +5,7 @@ import Home from "./Pages/Home";
 import Signup from "./Pages/Signup";
 import Login from "./Pages/Login";
 import UserWrapper from "./Pages/UserWrapper";
+import PrivateRoute from "./Authentication/PrivateRoute";
 
 
 class MainRouter extends Component {
@@ -22,10 +23,10 @@ class MainRouter extends Component {
 				<div>
 					<AppBar/>
 					<Switch>
-						<Route exact path="/" component={ Home }/>
-						<Route path="/signup" component={ Signup }/>
-						<Route path="/login" component={ Login }/>
-						<Route path="/:user/home" component={ UserWrapper }/>
+						<Route path="/home" component={ Home }/>
+						<Route exact path="/signup" component={ Signup }/>
+						<Route exact path="/login" component={ Login }/>
+						<PrivateRoute path="/:user" component={ UserWrapper }/>
 					</Switch>
 				</div>
 			</Router>
