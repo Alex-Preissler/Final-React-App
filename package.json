@@ -4,7 +4,14 @@
 	"description": "All-In-One Planner",
 	"main": "./server/server.js",
 	"scripts": {
-		"start": "cd ./server && node server.js"
+		"start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
+		"start:prod": "node ./server/server.js",
+		"start:dev": "concurrently \"nodemon --ignore 'client/*'\" \"npm run client\"",
+		"client": "cd ../client && npm run start",
+		"seed": "node scripts/seedDB.js",
+		"install": "cd ../client && yarn install",
+		"build": "cd ../client && npm run build",
+		"heroku-postbuild": "npm run build"
 	},
 	"repository": "https://github.com/Alex-Preissler/Final-React-App.git",
 	"author": "Alex-Preissler <AlexJPreissler@Outlook.com>",
