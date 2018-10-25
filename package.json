@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "All-In-One Planner",
   "main": "./server/server.js",
+  "scripts": {
+	  "start": "cd ./server && node server.js"
+  },
   "repository": "https://github.com/Alex-Preissler/Final-React-App.git",
   "author": "Alex-Preissler <AlexJPreissler@Outlook.com>",
   "license": "None",
