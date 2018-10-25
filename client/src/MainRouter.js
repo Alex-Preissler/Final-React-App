@@ -7,7 +7,6 @@ import Login from "./Pages/Login";
 import UserWrapper from "./Pages/UserWrapper";
 import PrivateRoute from "./Authentication/PrivateRoute";
 
-
 class MainRouter extends Component {
 
 	componentDidMount() {
@@ -18,10 +17,11 @@ class MainRouter extends Component {
 	}
 
 	render() {
+
 		return(
 			<Router>
 				<div>
-					<AppBar/>
+					<AppBar onClick={this.handleSignout}/>
 					<Switch>
 						<Route path="/home" component={ Home }/>
 						<Route exact path="/signup" component={ Signup }/>

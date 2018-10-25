@@ -8,7 +8,7 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 import Grid from "@material-ui/core/Grid";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import Hidden from "@material-ui/core/Hidden";
-import { Route, Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import API from "../JS/api-user";
 
 const styles = theme => ({
@@ -83,7 +83,7 @@ class Signup extends Component {
 		const singupSuccess = this.state.redirect;
 
 		if(singupSuccess) {
-			return <Redirect to="/"/>
+			return <Redirect to="/home"/>
 		}
 
 		return (

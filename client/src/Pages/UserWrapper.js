@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { withStyles } from "@material-ui/core/styles";
 import PropTypes from "prop-types";
 import Grid from "@material-ui/core/Grid";
-import Paper from "@material-ui/core/Paper";
 import UserNav from "../Components/UserNav";
 import UserHome from "../Components/UserHome";
 import Shopping from "../Components/Shopping";
@@ -10,7 +9,8 @@ import Calendar from "../Components/Calendar";
 import Cleaning from "../Components/Cleaning";
 import Workouts from "../Components/Workouts";
 import Meals from "../Components/Meals";
-import UserAuth from "../Authentication/Auth-Helper";
+
+
 
 
 const styles = theme => ({
@@ -27,7 +27,9 @@ class UserWrapper extends Component {
 	}
 
 	componentDidMount() {
+
 		this.renderView();
+		
 	}
 
 	changeView = (value) => {
@@ -72,7 +74,7 @@ class UserWrapper extends Component {
 		const { classes } = this.props;
 
 		return(
-			<Grid container>
+			<Grid container className={ classes.mainView }>
 				<Grid item md={3} lg={2} xl={2}>
 					<UserNav onClick={this.changeView}></UserNav>
 				</Grid>

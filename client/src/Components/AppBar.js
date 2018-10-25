@@ -11,7 +11,8 @@ import Menu from "@material-ui/core/Menu";
 import Grid from "@material-ui/core/Grid";
 import Hidden from "@material-ui/core/Hidden";
 import { withStyles } from "@material-ui/core/styles";
-import { Redirect,  Link, withRouter } from "react-router-dom";
+import { Link } from "react-router-dom";
+import SignoutButton from "./SignoutButton";
 import UserAuth from "../Authentication/Auth-Helper";
 
 const styles = {
@@ -31,10 +32,7 @@ class MainAppBar extends React.Component {
 
 	state = {
 		anchorEl: null,
-		signout: true
 	};
-
-
 
 	handleChange = event => {
 		this.setState({ auth: event.target.checked });
@@ -49,23 +47,10 @@ class MainAppBar extends React.Component {
 		this.setState({ anchorEl: null });
 	};
 
-	handleSignout = event => {
-		UserAuth.Signout(res => {
-			if(res === true) {
-				return this.setState({ singout: true });
-			}
-		})
-	}
-
 	render() {
 		const { classes } = this.props;
-		const { anchorEl, signout } = this.state;
+		const { anchorEl } = this.state;
 		const open = Boolean(anchorEl);
-
-		if(this.state.signout) {
-			this.setState({ signout: false });
-			return <Redirect to="/home"/>
-		}
 
 		return (
 			<AppBar position="static" className={classes.root}>
@@ -121,7 +106,7 @@ class MainAppBar extends React.Component {
 									>
 										<MenuItem onClick={this.handleClose}>Profile</MenuItem>
 										<MenuItem onClick={this.handleClose}>My Account</MenuItem>
-										<MenuItem onClick={this.handleClose}>Signout</MenuItem>
+										<MenuItem onClick={ this.onClick }><SignoutButton/></MenuItem>
 									</Menu>
 								</div>
 							)}

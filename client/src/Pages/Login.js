@@ -12,6 +12,7 @@ import UserAuth from "../Authentication/Auth-Helper";
 
 
 class Login extends Component {
+	
 	state = {
 		email: '',
 		password: '',
@@ -19,7 +20,7 @@ class Login extends Component {
 		redirectToReferrer: false
 	}
   
-	clickSubmit = () => {
+	login = () => {
 		const user = {
 			email: this.state.email,
 			password: this.state.password
@@ -51,7 +52,6 @@ class Login extends Component {
 	render() {
 	  
 	const to = "/" + UserAuth._id;     
-	console.log(this.props.location.state);
 	const { redirectToReferrer } = this.state;
 		  
 	if (redirectToReferrer) {
@@ -78,7 +78,7 @@ class Login extends Component {
 				}
 		  	</CardContent>
 		  	<CardActions>
-				<Button color="primary" variant="contained" onClick={this.clickSubmit}>Submit</Button>
+				<Button color="primary" variant="contained" onClick={ this.login }>Submit</Button>
 		  	</CardActions>
 		</Card>
 		)
