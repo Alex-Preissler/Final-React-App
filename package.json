@@ -4,45 +4,10 @@
 	"description": "All-In-One Planner",
 	"main": "./server/server.js",
 	"scripts": {
-		"start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
-		"start:prod": "node ./server/server.js",
-		"start:dev": "concurrently \"nodemon --ignore 'client/*'\" \"npm run client\"",
-		"client": "cd ../client && npm run start",
-		"seed": "node scripts/seedDB.js",
-		"install": "cd ../client && yarn install",
-		"build": "cd ../client && npm run build",
-		"heroku-postbuild": "npm run build"
+		"start": "cd ./server && npm run start"
 	},
 	"repository": "https://github.com/Alex-Preissler/Final-React-App.git",
 	"author": "Alex-Preissler <AlexJPreissler@Outlook.com>",
 	"license": "None",
-	"private": false,
-	"devDependencies": {
-		"concurrently": "^3.5.0",
-		"nodemon": "^1.11.0"
-	},
-	"dependencies": {
-		"bcryptjs": "^2.4.3",
-		"body-parser": "^1.18.3",
-		"express": "^4.16.4",
-		"if-env": "^1.0.4",
-		"mongoose": "^5.3.4",
-		"@material-ui/core": "^3.2.1",
-		"@material-ui/icons": "^3.0.1",
-		"axios": "^0.18.0",
-		"prop-types": "^15.6.2",
-		"react": "^16.5.2",
-		"react-dom": "^16.5.2",
-		"react-router-dom": "^4.3.1",
-		"react-scripts": "2.0.5"
-	},
-	"eslintConfig": {
-		"extends": "react-app"
-	},
-	"browserslist": [
-		">0.2%",
-		"not dead",
-		"not ie <= 11",
-		"not op_mini all"
-	]
+	"private": false
 }
