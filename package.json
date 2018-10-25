@@ -6,26 +6,15 @@
 	"scripts": {
 		"start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
 		"start:prod": "cd ./server && node server.js",
-		"start:dev": "concurrently \"nodemon --ignore 'client/*'\" \"npm run client\"",
-		"client": "cd ./client && npm run start",
-		"seed": "node scripts/seedDB.js",
-		"install": "cd ./client && yarn install",
-		"build": "cd ./client && npm run build",
-		"heroku-postbuild": "npm run build"
+		"install": "cd ./server && yarn install"
+	},
+	"engines": {
+		"node": "8.12.0",
+		"yarn": "1.9.4",
+		"npm": "6.4.1"
 	},
 	"repository": "https://github.com/Alex-Preissler/Final-React-App.git",
 	"author": "Alex-Preissler <AlexJPreissler@Outlook.com>",
 	"license": "None",
-	"private": false,
-	"devDependencies": {
-		"concurrently": "^3.5.0",
-		"nodemon": "^1.11.0"
-	},
-	"dependencies": {
-		"bcryptjs": "^2.4.3",
-		"body-parser": "^1.18.3",
-		"express": "^4.16.4",
-		"if-env": "^1.0.4",
-		"mongoose": "^5.3.4"
-	}
+	"private": false
 }
