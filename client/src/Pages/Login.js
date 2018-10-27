@@ -17,6 +17,7 @@ class Login extends Component {
 		email: '',
 		password: '',
 		error: '',
+		username: '',
 		redirectToReferrer: false
 	}
   
@@ -29,10 +30,17 @@ class Login extends Component {
 		console.log(user);
 
 		UserAuth.Authenticate(user, res => {
-			if(res === true) {
+
+			if(UserAuth.isAuthenticated) {
+
+				console.log(res);
+
 				this.setState({
-					redirectToReferrer: res
+					redirectToReferrer: true,
+					username: res.username
 				})
+
+				console.log(this.state);
 			}else{
 				this.setState({
 					error: "Invalid Email/Password."
@@ -51,7 +59,7 @@ class Login extends Component {
   
 	render() {
 	  
-	const to = "/" + UserAuth._id;     
+	const to = "/auth/" + this.state.username;     
 	const { redirectToReferrer } = this.state;
 		  
 	if (redirectToReferrer) {

@@ -83,7 +83,7 @@ class Signup extends Component {
 		const singupSuccess = this.state.redirect;
 
 		if(singupSuccess) {
-			return <Redirect to="/home"/>
+			return <Redirect to="/"/>
 		}
 
 		return (

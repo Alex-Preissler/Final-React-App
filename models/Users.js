@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
 const bcrypt = require("bcryptjs");
 
 const UserSchema = new mongoose.Schema({
@@ -33,6 +34,10 @@ const UserSchema = new mongoose.Schema({
 		type: String,
 		required: "Password is required."
 	},
+	cleaning: [{
+		type: Schema.Types.ObjectId,
+		ref: "CleanList"
+	}],
 	updated: Date,
 	created: {
 		type: Date,

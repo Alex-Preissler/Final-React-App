@@ -1,9 +1,8 @@
 import API from "../JS/api-auth";
 
 export default {
-	
-	isAuthenticated: false,	
-	_id: null,
+
+	isAuthenticated: false,
 	
 	Authenticate: function(user, res) {
 
@@ -11,10 +10,12 @@ export default {
 
 		API.Login(user)
 			.then(response => {
-				this.isAuthenticated = true;
-				this._id = response._id;
+				let username = response.data.username;
+
 				console.log(response);
-				res(this.isAuthenticated);
+				sessionStorage.setItem("usr", JSON.stringify(response.data))
+				this.checkIsAuthenticated();
+				res(username);
 			})
 			.catch(err => {
 				res(err);
@@ -23,9 +24,18 @@ export default {
 
 	},
 
+	checkIsAuthenticated: function() {
+
+		if(sessionStorage.getItem("usr")){
+			this.isAuthenticated = true;
+		}else{
+			this.isAuthenticated = false;
+		}
+	},
+
 	Signout: function(res) {
 		this.isAuthenticated = false;
-		this._id = null;
+		sessionStorage.removeItem("usr");
 		res(true);
 	}
 }

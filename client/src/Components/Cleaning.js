@@ -1,13 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import ListSubheader from '@material-ui/core/ListSubheader';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import Collapse from '@material-ui/core/Collapse';
-import ExpandLess from '@material-ui/icons/ExpandLess';
-import ExpandMore from '@material-ui/icons/ExpandMore';
+import ListItemWrapper from "./List-Components/List-Item-Wrapper";
 
 
 const styles = theme => ({
@@ -37,23 +31,8 @@ class Cleaning extends Component {
 
 		return(
 			<div className={classes.root}>
-        <List
-          component="nav"
-          subheader={<ListSubheader component="div">Cleaning List</ListSubheader>}
-        >
-          <ListItem button onClick={this.handleClick}>
-            <ListItemText inset primary="Bananas" />
-            {this.state.open ? <ExpandLess /> : <ExpandMore />}
-          </ListItem>
-          <Collapse in={this.state.open} timeout="auto" unmountOnExit>
-            <List component="div" disablePadding>
-              <ListItem button className={classes.nested}>
-                <ListItemText inset primary="Starred" />
-              </ListItem>
-            </List>
-          </Collapse>
-        </List>
-      </div>
+				<ListItemWrapper/>
+      		</div>
 		)
 	}
 }

@@ -10,9 +10,6 @@ import Cleaning from "../Components/Cleaning";
 import Workouts from "../Components/Workouts";
 import Meals from "../Components/Meals";
 
-
-
-
 const styles = theme => ({
 	mainView: {
 		maxHeight: '100%'
@@ -22,8 +19,14 @@ const styles = theme => ({
 
 class UserWrapper extends Component {
 
-	state = {
-		view: 0
+	constructor(props) {
+		super(props);
+
+		const user = sessionStorage.getItem("usr");
+		
+		this.state = {
+			view: 0
+		}
 	}
 
 	componentDidMount() {

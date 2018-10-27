@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Typography from '@material-ui/core/Typography';
-import { withTheme } from '@material-ui/core/styles';
+import { withTheme, withStyles } from '@material-ui/core/styles';
+import "../CSS/home.css";
 
 function Home(props) {
   const { theme } = props;
@@ -10,7 +11,7 @@ function Home(props) {
 
   const styles = {
     primaryText: {
-      backgroundColor: theme.palette.background.default,
+	  backgroundColor: theme.palette.background.default,
       padding: `${theme.spacing.unit}px ${theme.spacing.unit * 2}px`,
       color: primaryText,
     },
@@ -22,9 +23,8 @@ function Home(props) {
   };
 
   return (
-    <div style={{ width: 300 }}>
-      <Typography style={styles.primaryColor}>{`Primary color ${primaryColor}`}</Typography>
-      <Typography style={styles.primaryText}>{`Primary text ${primaryText}`}</Typography>
+    <div>
+      <img src="https://freerangestock.com/sample/113691/geometric-background-.jpg"/>
     </div>
   );
 }

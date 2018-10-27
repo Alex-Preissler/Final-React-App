@@ -23,10 +23,10 @@ class MainRouter extends Component {
 				<div>
 					<AppBar onClick={this.handleSignout}/>
 					<Switch>
-						<Route path="/home" component={ Home }/>
+						<Route exact path="/" component={ Home }/>
 						<Route exact path="/signup" component={ Signup }/>
 						<Route exact path="/login" component={ Login }/>
-						<PrivateRoute path="/:user" component={ UserWrapper }/>
+						<PrivateRoute excact path="/auth/:user" component={ UserWrapper }/>
 					</Switch>
 				</div>
 			</Router>

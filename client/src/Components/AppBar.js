@@ -22,7 +22,9 @@ const styles = {
 	grow: {
 		flexGrow: 1,
 		marginLeft: -12,
-		marginRight: 20
+		marginRight: 20,
+		marginTop: 5,
+		paddingTop: 5
 	}
 };
 
@@ -32,10 +34,6 @@ class MainAppBar extends React.Component {
 
 	state = {
 		anchorEl: null,
-	};
-
-	handleChange = event => {
-		this.setState({ auth: event.target.checked });
 	};
 
 	handleMenu = event => {
@@ -57,7 +55,7 @@ class MainAppBar extends React.Component {
 				<Grid container>
 					<Grid item xs={12} sm={2}>
 						<Typography component="h4" variant="h4" className={classes.grow}>
-							App Name Here
+							A.I.O.
             			</Typography>
 					</Grid>
 					<Hidden only={'xs'}>

@@ -5,7 +5,7 @@ import UserAuth from "../Authentication/Auth-Helper";
 const SignoutButton = withRouter(({ history }) =>
 		  <span
 			onClick={() => {
-			  UserAuth.Signout(() => history.push("/home"));
+			  UserAuth.Signout(() => history.push("/"));
 			}}
 		  >
 			Sign out
